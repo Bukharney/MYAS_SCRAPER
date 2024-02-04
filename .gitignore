@@ -1,0 +1,15 @@
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+assignments.json
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+.gitignore
