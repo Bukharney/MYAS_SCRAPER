@@ -8,5 +8,7 @@ COPY . /app
 # Install playwright and Chromium
 RUN playwright install chromium
 
+EXPOSE 8080
+
 # Start the FastAPI app with uvicorn
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
