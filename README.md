@@ -27,7 +27,7 @@ Usage:
 
 Run the script to fetch and track assignments:
 ```
-python main.py
+python scraper.py
 ```
 The script will log in to your LEB2 account, fetch assignment details, and save them in assignments.json.
 
