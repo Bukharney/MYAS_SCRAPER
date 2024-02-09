@@ -10,4 +10,4 @@ RUN playwright install chromium
 
 EXPOSE $PORT
 
-CMD uvicorn app.main:app --host 0.0.0.0 --port $PORT --reload 
+CMD uvicorn main:app --host 0.0.0.0 --port $PORT --reload 
