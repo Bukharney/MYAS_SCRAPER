@@ -6,6 +6,7 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 COPY . /app
 
 # Install playwright and Chromium
+RUN playwright install chromium
 RUN playwright install-deps chromium
 
 EXPOSE $PORT
