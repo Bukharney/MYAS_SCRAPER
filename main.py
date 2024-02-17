@@ -1,10 +1,13 @@
-from fastapi import FastAPI
+from typing import Annotated
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from scrapper import scrape_assignments
-from pydantic import BaseModel
-
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 app = FastAPI()
+
+security = HTTPBasic()
+
 
 origins = ["*"]
 
@@ -17,16 +20,11 @@ app.add_middleware(
 )
 
 
-class LEB2Credentials(BaseModel):
-    username: str
-    password: str
-
-
 @app.get("/")
 def root():
     return {"Hello": "World"}
 
 
 @app.post("/")
-async def scrape(leb2: LEB2Credentials):
-    return await scrape_assignments(leb2.username, leb2.password)
+async def scrape(credentials: Annotated[HTTPBasicCredentials, Depends(security)]):
+    return await scrape_assignments(credentials.username, credentials.password)
