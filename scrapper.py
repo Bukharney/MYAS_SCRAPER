@@ -1,5 +1,4 @@
 from playwright.async_api import async_playwright
-from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 
 
@@ -14,6 +13,12 @@ async def scrape_assignments(username: str, password: str):
         await page.fill('input[name="password"]', password)
         await page.click('button[type="submit"]')
         await page.wait_for_load_state("load")
+        if (
+            page.url
+            == "https://login1.leb2.org/login?app_id=1&redirect_uri=https%3A%2F%2Fapp.leb2.org%2Flogin"
+        ):
+            await browser.close()
+            raise Exception("Invalid credentials")
         soup = BeautifulSoup(await page.inner_html("#classListMain"), "html.parser")
 
         class_list = []
